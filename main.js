@@ -4,40 +4,18 @@
 
 //crear un algoritmo con un condicional, usando un ciclo utilizar funciones para realizar las operaciones
 
-// const addition = (a, b) => a + b 
-// const substraction = (a, b) => a - b 
-
-// const addVat = x => x * 0.20;
-
-
-//declaro las variables
-
-
-// let priceSoftToyDog = 20;
-// let priceSoftToyCat = 18.5;
-// let priceCatCave = 42.5;
-// let priceCatFood = 15.8;
-// let priceDogFood = 21.2;
-// let priceDiscount = 5;
-
-
-
-
-
-
-//declaro la variable  totalPrice por fuera del scope de la funcion
-let totalPrice = 0;
-
 
 //declaro la funcion
+
 function purchaseProducts () {
 let quantity = 0;
 let price = 0;
 let productId = '';
+let totalPrice = 0;
 
 
     while (!productId || productId === 0 || productId > 5) { 
-            productId = parseInt(prompt('Which product do you want to shop? \n 1)Soft Dog Toy (£20) \n 2)Soft Cat Toy (£18.5) \n 3)Cat Cave (£42.5) \n 4)Cat Food(£15.8) \n 5)Dog Food (£21.2) '));
+            productId = parseInt(prompt('Which product do you want to shop? \n 1)Soft Dog Toy (£20) \n 2)Soft Cat Toy (£22) \n 3)Cat Cave (£42.5) \n 4)Cat Food(£18) \n 5)Dog Food (£25) '));
             quantity = parseInt(prompt('How many do you want?'))
         }
 
@@ -48,7 +26,7 @@ let productId = '';
             break;
         case 2:
             productId = 'Soft Cat Toy';
-            price = 18.5;
+            price = 22;
             break;
         case 3:
             productId = 'Cat Cave';
@@ -56,11 +34,11 @@ let productId = '';
             break;
         case 4:
             productId = 'Cat Food';
-            price = 15.8;
+            price = 18;
             break;
         case 5:
             productId = 'Dog Food';
-            price = 21.2;
+            price = 25;
             break;
         default:
             alert ('Please pick a product to continue');
@@ -71,14 +49,24 @@ let productId = '';
     while (!quantity || quantity === 0) {
         quantity = parseInt(prompt('How many would you like?'));
     }
+
     totalPrice += quantity * price;
     quantity += quantity;
 
-    alert ('Congratulations, your purchase is ' + productId + ' and you paid £' + totalPrice)
+    //Le aviso al usuario cuanto gasto y en que producto
+    alert ('Congratulations, you purchased ' + productId + ' and you paid £' + totalPrice)
+
+    //calculo el VAT (iva)
+    const addVAT = price * 0.20;
+
+    //muestro el VAT (iva) separado en consola
+    let vatOfProduct = addVAT;   
+    console.log('The VAT for this purchase is: ' + vatOfProduct)
 }
+
+
+
 
 //invoco la funcion
 purchaseProducts ();
 
-//muestro por consola el precio total
-console.log(totalPrice)
