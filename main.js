@@ -1,7 +1,5 @@
 //PET SHOP venta de productos
 
-
-
 function purchaseProducts () {
 let quantity = 0;
 let price = 0;
@@ -9,7 +7,7 @@ let productId = '';
 let totalPrice = 0;
 let keepShopping = false;
 let totalQuantity =0;
-let detailsOfPurchase = '';
+
 
     do { 
         productId = parseInt(prompt('Which product do you want to shop? \n 1)Soft Dog Toy (£20) \n 2)Soft Cat Toy (£22) \n 3)Cat Cave (£42.5) \n 4)Cat Food(£18) \n 5)Dog Food (£25) '));
@@ -56,8 +54,6 @@ let detailsOfPurchase = '';
     totalPrice += validatedQuantity * price;
     totalQuantity += quantity;
 
-    detailsOfPurchase += validatedProductId
-
     keepShopping = confirm('Do you want to keep shopping?')
 
 } while(keepShopping)
@@ -94,14 +90,14 @@ function validateQuantity (quantity) {
 }
 
 
-// creo funcion para calculo de IVA
+// creo funcion para calculo de IVA pagaron del precio
 
-function addVAT (totalPrice) {
+function calculateVATAmount(totalPrice) {
     
-    addVAT = totalPrice * 0.20;
-    console.log('The VAT for this purchase is: ' + addVAT)
+    vatamount = totalPrice * 0.20;
+    console.log('The VAT for this purchase is: ' + vatamount)
 
-    return totalPrice;
+    return vatamount;
 }
 
 
@@ -123,4 +119,6 @@ function calculateDelivery (totalPrice) {
 }
 
 
-calculateDelivery(((purchaseProducts(addVAT))));
+const totalPrice = purchaseProducts();
+calculateDelivery(totalPrice);
+calculateVATAmount(totalPrice);
