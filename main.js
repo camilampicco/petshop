@@ -1,5 +1,7 @@
 //PET SHOP venta de productos
 
+
+
 function purchaseProducts () {
 let quantity = 0;
 let price = 0;
@@ -7,14 +9,16 @@ let productId = '';
 let totalPrice = 0;
 let keepShopping = false;
 let totalQuantity =0;
-
+let detailsOfPurchase = '';
 
     do { 
         productId = parseInt(prompt('Which product do you want to shop? \n 1)Soft Dog Toy (£20) \n 2)Soft Cat Toy (£22) \n 3)Cat Cave (£42.5) \n 4)Cat Food(£18) \n 5)Dog Food (£25) '));
-        quantity = parseInt(prompt('How many do you want?'))
-
-        // validateProduct (productId)
         let validatedProductId = validateProductId (productId)
+        if (productId === 1) {
+            alert('This item is on sale! 20% OFF')
+        }
+
+        quantity = parseInt(prompt('How many do you want?'))
         let validatedQuantity = validateQuantity (quantity)
 
     switch (validatedProductId){
@@ -45,9 +49,14 @@ let totalQuantity =0;
             break;
     }
 
+    if (productId === 1) {
+        price = price * 0.8;
+    }
 
     totalPrice += validatedQuantity * price;
     totalQuantity += quantity;
+
+    detailsOfPurchase += validatedProductId
 
     keepShopping = confirm('Do you want to keep shopping?')
 
@@ -57,22 +66,7 @@ return totalPrice;
 }
 
 
-
-
-// creo funcion para descuentos
-
-function addDiscount (totalPrice){
-    if (totalPrice > 50){
-        alert ('Good news! That product is on discount')
-        return totalPrice * 0.80;
-    } else {
-        return totalPrice
-    }
-}
-
-
-
-//validacion de producto
+//validacion de producto ingresado
 
 function validateProductId (productId) { 
     while(productId === 0 || productId > 5) {
@@ -103,29 +97,30 @@ function validateQuantity (quantity) {
 // creo funcion para calculo de IVA
 
 function addVAT (totalPrice) {
-    const addVAT = totalPrice * 0.20;   
+    
+    addVAT = totalPrice * 0.20;
     console.log('The VAT for this purchase is: ' + addVAT)
 
-    return addVAT;
+    return totalPrice;
 }
 
 
 // creo funcion para el calculo de Envio
 
-function deliveryToAddress (totalPrice) {
+function calculateDelivery (totalPrice) {
     let priceOfShipping = 5;
     
-    prompt('DELIVERY! Which is your address?', 'Please insert Post Code')
+    prompt('Delivery! Which is your address?', 'My Post Code is')
 
-    if (totalPrice > 60){
-        alert ('You are qualified for free shipping! You now need to pay: $' + totalPrice)
+    if (totalPrice >= 60){
+        alert ('You are qualified for free shipping! You now need to pay: £' + totalPrice)
     } else if (totalPrice < 60 && totalPrice !== 0) { 
         totalPrice += priceOfShipping
-        alert ('The shipping will cost you $5')
+        alert ('The shipping will cost you £5. You now need to pay: £' + totalPrice) 
     }
 
     return totalPrice;
 }
 
 
-deliveryToAddress((addDiscount(purchaseProducts(addVAT))));
+calculateDelivery(((purchaseProducts(addVAT))));
