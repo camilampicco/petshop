@@ -105,7 +105,7 @@ function calculateVATAmount(totalPrice) {
 
 function calculateDelivery (totalPrice) {
     let priceOfShipping = 5;
-    
+
     prompt('Delivery! Which is your address?', 'My Post Code is')
 
     if (totalPrice >= 60){
@@ -119,6 +119,124 @@ function calculateDelivery (totalPrice) {
 }
 
 
+
+
 const totalPrice = purchaseProducts();
 calculateDelivery(totalPrice);
 calculateVATAmount(totalPrice);
+
+
+// base de datos de usuarios
+
+
+
+
+
+
+//funciones de orden superior 
+
+const products = [
+    {
+        name: 'Soft Toy Dog',
+        price: 20
+    },
+    {
+        name: 'Soft Cat Toy',
+        price: 22
+    },    {
+        name: 'Cat Cave',
+        price: 42.5
+    },    {
+        name: 'Cat Food',
+        price: 18
+    },    {
+        name: 'Dog Food',
+        price: 25
+    },
+]
+
+
+//find
+
+const result = products.find(item => item.name === 'Cat Cave');
+console.log (result)
+
+
+//filters
+
+const filter1 = products.filter(item => item.price < 25)
+console.log (filter1)
+
+const filter2 = products.filter(item => item.name.includes('Cat'))
+console.log(filter2);
+
+
+//sorting by name
+
+const sortByName = products.sort((a,b) => {
+    if (a.name > b.name) {
+        return 1;
+    }
+    if (a.name < b.name) {
+        return -1;
+    }
+    else {
+        return 0
+    }
+})
+console.log(sortByName)
+
+
+//sorting by ascendent price 
+
+const sortByPrice = products.sort((a,b) => {
+    if (a.price > b.price) {
+        return 1;
+    }
+    if (a.price < b.price) {
+        return -1;
+    }
+    else {
+        return 0;
+    }
+})
+console.log(sortByPrice)
+
+
+// carrito de compras
+
+const basket = [
+    {name: 'Dog Food', price: 25, quantity: 1},
+    {name: 'Soft Toy Dog', price: 20, quantity: 3},
+]
+
+//cantidad que compra  ----->>>>> estaria sumando los que yo pongo en la funcion no los que elige el user
+const basketTotal = basket.reduce((acc, item) => acc + item.quantity, 0);
+console.log(basketTotal)
+
+//total que compra
+const totalSpent = basket.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+console.log(totalSpent)
+
+
+
+//creacion de usuarios
+
+const names = [];
+
+let newUser = '';
+
+do {
+    if (newUser != ''){
+        alert ('That username is taken, please choose other');
+    }
+    newUser = prompt('Please write your username')
+
+} while (names.includes(newUser))
+
+names.push(newUser) //ver bien como hacer para que se sume al array
+
+alert ('The user name has been successfully created!')
+
+console.log(names)
+
