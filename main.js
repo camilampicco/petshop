@@ -128,56 +128,12 @@
 // calculateVATAmount(totalPrice);
 
 
-// base de datos de usuarios
-
 
 
 
 
 //funciones de orden superior 
 
-const products = [
-    {
-        id: 1,
-        name: 'Soft Toy Dog',
-        price: 20,
-        description: 'individual toy for dogs',
-        size: 'one size',
-        quantity: 1
-    },
-    {
-        id: 2,
-        name: 'Soft Cat Toy',
-        price: 22,
-        description: 'individual toy for cats',
-        size: 'one size',
-        quantity: 1
-    },    
-    {
-        id: 3,
-        name: 'Cat Cave',
-        price: 42.5,
-        description: 'Bowie cave for cats',
-        size: 'one size',
-        quantity: 1
-    },    
-    {
-        id: 4,
-        name: 'Cat Food',
-        price: 18,
-        description: 'Food for indoor cats',
-        size: '1kg',
-        quantity: 1
-    },    
-    {
-        id: 5,
-        name: 'Dog Food',
-        price: 25,
-        description: 'Food for small dogs',
-        size: '1kg',
-        quantity: 1
-    },
-]
 
 
 //find
@@ -211,6 +167,7 @@ const sortByName = products.sort((a,b) => {
 console.log(sortByName)
 
 
+
 //sorting by ascendent price 
 
 const sortByPrice = products.sort((a,b) => {
@@ -225,6 +182,31 @@ const sortByPrice = products.sort((a,b) => {
     }
 })
 console.log(sortByPrice)
+
+
+
+//sorting by descendent price 
+
+const sortByDescendentPrice = products.sort((a,b) => {
+    if (a.price < b.price) {
+        return 1;
+    }
+    if (a.price > b.price) {
+        return -1;
+    }
+    else {
+        return 0;
+    }
+})
+console.log(sortByDescendentPrice)
+
+
+
+//uso metodo MAP para lanzar un descuento del 15% a todos los productos
+
+const discount = products.map (({price}) => ({[price] : price * 0.85}));
+console.log (discount)
+
 
 
 
@@ -246,39 +228,31 @@ console.log(totalSpent)
 
 
 
+//creacion de nombres de usuarios
 
-
-//creacion de usuarios ---->>>> trabajando en esto
-
-const listOfNames = [];
-let inputName = '';
+const listOfNames = ['Ana'];
+newUser = prompt('Please insert your username')
 
 do {
-    inputName = prompt('Please insert your username')
-    if (inputName = ''){
-        alert('The user name cannot be empty' )
-    } else {
-        listOfNames.push(inputName);
-        console.log(inputName)
+    if (newUser == '') {
+        alert('The user name cannot be empty')
+    } else if (newUser = ! '') {
+        alert('The user name is taken, please choose another one')
     }
-} while (inputName)
 
-const newList = listOfNames.concat
-console.log()
+    newUser = prompt('Please insert your username')
+} while (listOfNames.indexOf(newUser) != -1)
+
+listOfNames.push(newUser);
+
+alert('Your username has been successfully created!')
+
+console.log(listOfNames)
 
 
-// const names = [];
-// let newUser = ''
 
-//     if (newUser != ''){
-//         newUser = prompt('Please write your username')
-//         alert ('That username is taken, please choose other');
-// } while (names.includes(newUser))
 
-// names.push(newUser) //ver bien como hacer para que se sume al array
 
-// alert ('The user name has been successfully created!')
-// console.log(names.join('\n'))
 
 
 
