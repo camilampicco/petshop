@@ -11,8 +11,22 @@ const product5 = new Product(5, 'Dog Food', 25);
 arrayProducts.push(product1, product2, product3, product4, product5);
 
 
+// carrito de compras
+
+const basket = [];
+
+//cantidad que compra  ----->>>>> estaria sumando los que yo pongo en la funcion no los que elige el user
+const basketTotal = basket.reduce((acc, item) => acc + item.quantity, 0);
+console.log(basketTotal)
+
+//total que compra
+const totalSpent = basket.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+console.log(totalSpent)
+
+
+
 //funciones de orden superior 
-//find
+//FIND
 
 const result = arrayProducts.find(item => item.name === 'Cat Cave');
 console.log (result)
@@ -21,8 +35,7 @@ const resultId = arrayProducts.find(item => item.Id === 1);
 console.log (resultId)
 
 
-
-//filters
+//FILTERS
 
 const filter1 = arrayProducts.filter(item => item.price < 25)
 console.log (filter1)
@@ -31,7 +44,7 @@ const filter2 = arrayProducts.filter(item => item.name.includes('Cat'))
 console.log(filter2);
 
 
-//sorting by name
+//SORT BY NAME
 
 const sortByName = arrayProducts.sort((a,b) => {
     if (a.name > b.name) {
@@ -47,7 +60,7 @@ const sortByName = arrayProducts.sort((a,b) => {
 console.log(sortByName)
 
 
-//sorting by ascendent price 
+//SORT BY ASCENDENT PRICE 
 
 const sortByPrice = arrayProducts.sort((a,b) => {
     if (a.price > b.price) {
@@ -63,7 +76,7 @@ const sortByPrice = arrayProducts.sort((a,b) => {
 console.log(sortByPrice)
 
 
-//sorting by descendent price 
+//SORT BY DESCENDENT PRICE 
 
 const sortByDescendentPrice = arrayProducts.sort((a,b) => {
     if (a.price < b.price) {
@@ -79,7 +92,7 @@ const sortByDescendentPrice = arrayProducts.sort((a,b) => {
 console.log(sortByDescendentPrice)
 
 
-//uso metodo MAP para lanzar un descuento del 15% a todos los productos
+//MAP para lanzar un descuento del 15% a todos los productos
 
 const discount = arrayProducts.map (({price}) => ({[price] : price * 0.85}));
 console.log (discount)
@@ -108,12 +121,14 @@ function purchaseProducts() {
             alert ('we dont have that one')
         }
 
+        basket.append({name: product[productId].name, price: product[price], quantity: product[price]}),
+
         keepShopping = confirm('do you want to keep shopping?')
 
     } while(keepShopping)
 
 calculateVATAmount(total)
-
+calculateDelivery (total)
 }
 
 
@@ -133,12 +148,12 @@ function validateQuantity (productQuantity) {
 }
 
 
-// // // creo funcion para calculo de IVA pagaron del precio
+// creo funcion para calculo de IVA (VAT) pagaron del precio
 
 function calculateVATAmount(total) {
     
     vatamount = total * 0.20;
-    // console.log('The VAT for this purchase is: ' + vatamount)
+    console.log('The VAT for this purchase is: ' + vatamount)
 
 }
 
@@ -160,35 +175,7 @@ function calculateDelivery (total) {
     return total;
 }
 
-
-
-
 const total = purchaseProducts();
-calculateVATAmount(total)
-calculateDelivery(total);
-
-
-
-
-
-
-
-
-
-// carrito de compras
-
-const basket = [
-    {name: 'Dog Food', price: 25, quantity: 1},
-    {name: 'Soft Toy Dog', price: 20, quantity: 3},
-]
-
-//cantidad que compra  ----->>>>> estaria sumando los que yo pongo en la funcion no los que elige el user
-const basketTotal = basket.reduce((acc, item) => acc + item.quantity, 0);
-console.log(basketTotal)
-
-//total que compra
-const totalSpent = basket.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-console.log(totalSpent)
 
 
 
@@ -199,9 +186,9 @@ const listOfNames = ['Ana'];
 newUser = prompt('Please insert your username')
 
 do {
-    if (newUser === '') {
+    if (newUser == '') {
         alert('The user name cannot be empty')
-    } else if (newUser ==! '') {
+    } else if (newUser =! '') {
         alert('The user name is taken, please choose another one')
     }
 
