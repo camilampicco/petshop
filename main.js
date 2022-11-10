@@ -17,6 +17,10 @@ arrayProducts.push(product1, product2, product3, product4, product5);
 const result = arrayProducts.find(item => item.name === 'Cat Cave');
 console.log (result)
 
+const resultId = arrayProducts.find(item => item.Id === 1);
+console.log (resultId)
+
+
 
 //filters
 
@@ -82,100 +86,87 @@ console.log (discount)
 
 
 
+//funcion de compra
 
-function purchaseProducts () {
-let productId ='';
-let productQuantity = 0;
-let totalPrice = 0;
-let keepShopping = false; 
+function purchaseProducts() {
+    let productId = 0;
+    let productQuantity = 0;
+    let total = 0;
+    let keepShopping = false;
 
+    do {
+        productId = parseInt(prompt('which product do you want to buy? 1, 2 ,3 , 4 , 5 '));
+        const product = arrayProducts.find(product => product.Id === productId);
 
-    do { 
-        productId = parseInt(prompt('Which product do you want to shop? \n 1)Soft Dog Toy (£20) \n 2)Soft Cat Toy (£22) \n 3)Cat Cave (£42.5) \n 4)Cat Food(£18) \n 5)Dog Food (£25) '));
-        let validatedProductId = validateProductId (productId)
-        if (productId === 1) {
-            price = productId.price * 0.8;
-            alert('This item is on sale! 20% OFF')
-        }
+        productQuantity = parseInt(prompt('how many?'));
+        quantityValidated = validateQuantity(productQuantity)
 
-        const product = arrayProducts.find(product => product.id === productId);
 
         if (product) {
-            totalPrice += productId * productQuantity;
+            total =+ product.price * productQuantity;
         } else {
-            alert ('Sorry, we dont have that product')
+            alert ('we dont have that one')
         }
 
-    keepShopping = confirm('Do you want to keep shopping?')
+        keepShopping = confirm('do you want to keep shopping?')
 
-} while(keepShopping)
+    } while(keepShopping)
 
-return totalPrice;
+calculateVATAmount(total)
+
 }
 
 
-// //validacion de producto ingresado
+//validacion para cantidad ingresada
 
-function validateProductId (productId) { 
-    while(productId === 0 || productId > 5) {
-            alert ('Please pick a product to continue')
-            productId = parseInt(prompt('Which product do you want to shop? \n 1)Soft Dog Toy (£20) \n 2)Soft Cat Toy (£22) \n 3)Cat Cave (£42.5) \n 4)Cat Food(£18) \n 5)Dog Food (£25) '));
-}
+function validateQuantity (productQuantity) { 
+    while(Number.isNaN(productQuantity) || productQuantity === 0) {
 
-    return productId;
-}
-
-
-// //validacion para cantidad ingresada
-
-function validateQuantity (quantity) { 
-    while(Number.isNaN(quantity) || quantity === 0) {
-        if (quantity != 0){
-            alert ('Please insert a number')
-        } else {
+        if (productQuantity === 0){
             alert ('The number should be different than zero')
-        }
-        quantity = parseInt(prompt('How many do you want?'));
+        } 
+
+        productQuantity = parseInt(prompt('How many do you want?'));
     }
 
-    return quantity;
+    return productQuantity;
 }
 
 
-// // creo funcion para calculo de IVA pagaron del precio
+// // // creo funcion para calculo de IVA pagaron del precio
 
-function calculateVATAmount(totalPrice) {
+function calculateVATAmount(total) {
     
-    vatamount = totalPrice * 0.20;
-    console.log('The VAT for this purchase is: ' + vatamount)
+    vatamount = total * 0.20;
+    // console.log('The VAT for this purchase is: ' + vatamount)
 
-    return vatamount;
 }
 
 
-// // creo funcion para el calculo de Envio
+// creo funcion para el calculo de Envio
 
-function calculateDelivery (totalPrice) {
+function calculateDelivery (total) {
     let priceOfShipping = 5;
 
     prompt('Delivery! Which is your address?', 'My Post Code is')
 
-    if (totalPrice >= 60){
-        alert ('You are qualified for free shipping! You now need to pay: £' + totalPrice)
-    } else if (totalPrice < 60 && totalPrice !== 0) { 
-        totalPrice += priceOfShipping
-        alert ('The shipping will cost you £5. You now need to pay: £' + totalPrice) 
+    if (total >= 60){
+        alert ('You are qualified for free shipping! You now need to pay: £' + total)
+    } else if (total < 60 && total !== 0) { 
+        total += priceOfShipping
+        alert ('The shipping will cost you £5. You now need to pay: £' + total) 
     }
 
-    return totalPrice;
+    return total;
 }
 
 
 
 
-const totalPrice = purchaseProducts();
-calculateDelivery(totalPrice);
-calculateVATAmount(totalPrice);
+const total = purchaseProducts();
+calculateVATAmount(total)
+calculateDelivery(total);
+
 
 
 
@@ -208,9 +199,9 @@ const listOfNames = ['Ana'];
 newUser = prompt('Please insert your username')
 
 do {
-    if (newUser == '') {
+    if (newUser === '') {
         alert('The user name cannot be empty')
-    } else if (newUser =! '') {
+    } else if (newUser ==! '') {
         alert('The user name is taken, please choose another one')
     }
 
