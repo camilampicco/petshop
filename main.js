@@ -43,6 +43,19 @@ const sortByPrice = arrayProducts.sort((a,b) => {
 console.log(sortByPrice)
 
 
+//SORT ALPHABETICALLY
+
+const sortedByName = arrayProducts.sort((a, b) => {
+    if (a.name < b.name) {
+        return 1;
+    }
+    if (a.name > b.name) {
+        return -1
+    }
+    return 0
+})
+
+console.log(sortedByName)
 
 
 //MAP para lanzar un descuento del 15% a todos los productos
